@@ -354,6 +354,28 @@
     .btn-primary::after { display: none; }
     .share-row        { flex-direction: column; }
   }
+  /* 右下の固定ボタン */
+.back-float{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: inline-block;
+  padding: 10px 14px;
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  box-shadow: 0 6px 18px rgba(26,26,46,0.12);
+}
+.back-float:hover{ opacity: 0.95; transform: translateY(-2px); transition: .12s; }
+
+/* モバイルで邪魔なら少し小さく */
+@media (max-width: 420px){
+  .back-float{ padding:8px 10px; right: 10px; bottom: 10px; font-size:13px; }
+}
 </style>
 </head>
 <body>
@@ -883,5 +905,6 @@
   if (fromUrl) calculate();
 })();
 </script>
+  <a href="/" class="back-float" aria-label="トップページへ戻る">トップへ</a>
 </body>
 </html>
