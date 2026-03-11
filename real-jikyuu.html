@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZP3DCGL40"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -29,364 +28,22 @@
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "All",
   "description": "Webライターが文字単価・作業時間・修正回数から実質時給を計算できる無料ツール。",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "JPY"
-  }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
 }
 </script>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap');
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink:    #1a1a2e;
-    --paper:  #f5f0e8;
-    --accent: #c84b31;
-    --gold:   #d4a853;
-    --muted:  #7a7468;
-    --good:   #2d6a4f;
-    --warn:   #e76f51;
-    --border: rgba(26,26,46,0.12);
-    --shadow: 0 4px 24px rgba(26,26,46,0.08);
-  }
-
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background-color: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(200,75,49,0.04) 31px, rgba(200,75,49,0.04) 32px),
-      repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(200,75,49,0.04) 31px, rgba(200,75,49,0.04) 32px);
-  }
-
-  /* Header */
-  header {
-    background-color: var(--ink); color: var(--paper);
-    padding: 28px 24px 24px; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  header::before {
-    content: ''; position: absolute; top: -40px; right: -40px;
-    width: 180px; height: 180px; border-radius: 50%;
-    background: rgba(212,168,83,0.15); pointer-events: none;
-  }
-  header::after {
-    content: ''; position: absolute; bottom: -60px; left: -20px;
-    width: 140px; height: 140px; border-radius: 50%;
-    background: rgba(200,75,49,0.12); pointer-events: none;
-  }
-  .header-label {
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 0.2em; color: var(--gold);
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(22px, 5vw, 34px);
-    font-weight: 400; letter-spacing: -0.01em; line-height: 1.2;
-  }
-  header p { font-size: 13px; color: rgba(245,240,232,0.55); margin-top: 8px; }
-
-  /* Layout */
-  .container { max-width: 540px; margin: 0 auto; padding: 32px 20px 60px; }
-
-  /* Card */
-  .card {
-    background: #fff; border-radius: 2px;
-    border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden;
-  }
-  .card-section { padding: 24px 24px 20px; border-bottom: 1px solid var(--border); }
-
-  .section-title {
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 0.18em; color: var(--muted);
-    text-transform: uppercase; margin-bottom: 20px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  /* Fields */
-  .field { margin-bottom: 16px; }
-  .field:last-child { margin-bottom: 0; }
-  label {
-    display: block; font-size: 12px; font-weight: 500;
-    color: var(--muted); margin-bottom: 6px; letter-spacing: 0.02em;
-  }
-  .input-wrap { position: relative; display: flex; align-items: center; }
-  input[type="number"] {
-    width: 100%; padding: 10px 40px 10px 14px;
-    font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500;
-    color: var(--ink); background: var(--paper);
-    border: 1.5px solid var(--border); border-radius: 2px;
-    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-    -moz-appearance: textfield;
-  }
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
-  input[type="number"]:focus {
-    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,75,49,0.1); background: #fff;
-  }
-  .unit {
-    position: absolute; right: 12px;
-    font-family: 'DM Mono', monospace; font-size: 11px;
-    color: var(--muted); pointer-events: none;
-  }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-  /* Buttons */
-  .btn-area { padding: 20px 24px; }
-  .btn-row { display: flex; gap: 8px; }
-  button {
-    padding: 14px; border: none; border-radius: 2px;
-    font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: 700;
-    letter-spacing: 0.06em; cursor: pointer;
-    transition: background 0.2s, opacity 0.2s, transform 0.1s;
-    position: relative; overflow: hidden;
-  }
-  button:active:not(:disabled) { transform: scale(0.99); }
-
-  .btn-primary { flex: 1; background: var(--ink); color: var(--paper); }
-  .btn-primary:hover { background: #2d2d4e; }
-  .btn-primary::after {
-    content: '→'; position: absolute; right: 14px; top: 50%;
-    transform: translateY(-50%); font-size: 16px; opacity: 0.5;
-  }
-  .btn-ghost {
-    background: transparent; color: var(--muted);
-    border: 1.5px solid var(--border); padding: 14px 16px;
-    font-size: 12px; letter-spacing: 0.04em;
-  }
-  .btn-ghost:hover:not(:disabled) { background: var(--paper); color: var(--ink); border-color: var(--muted); }
-  .btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
-
-  /* Error */
-  .error-note {
-    display: none; margin-top: 16px; padding: 12px 16px;
-    background: rgba(200,75,49,0.08); border: 1.5px solid rgba(200,75,49,0.25);
-    border-radius: 2px; font-size: 13px; color: var(--accent); font-weight: 500;
-  }
-
-  /* Result card */
-  .result-card {
-    margin-top: 20px; background: #fff;
-    border: 1px solid var(--border); border-radius: 2px;
-    box-shadow: var(--shadow); overflow: hidden;
-    display: none; animation: slideUp 0.35s cubic-bezier(0.22,1,0.36,1);
-  }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .result-header {
-    background: var(--ink); padding: 16px 24px;
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
-  }
-  .result-body { padding: 0 24px 24px; }
-
-  .hourly-big {
-    padding: 24px 0 20px; border-bottom: 1px solid var(--border); text-align: center;
-  }
-  .hourly-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 6px; }
-  .hourly-value {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(42px, 10vw, 64px); line-height: 1; letter-spacing: -0.02em;
-  }
-  .hourly-value .yen { font-size: 0.45em; vertical-align: super; margin-right: 4px; }
-  .eval-badge {
-    display: inline-block; margin-top: 12px; padding: 5px 16px;
-    border-radius: 40px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
-  }
-  .eval-good { background: rgba(45,106,79,0.1);   color: var(--good); }
-  .eval-norm { background: rgba(212,168,83,0.15);  color: #9a7000; }
-  .eval-warn { background: rgba(231,111,81,0.12);  color: var(--warn); }
-
-  /* Gauge */
-  .gauge-wrap { padding: 20px 0 18px; border-bottom: 1px solid var(--border); }
-  .gauge-section-label {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px;
-  }
-  .gauge-track {
-    position: relative; height: 8px;
-    background: var(--border); border-radius: 4px;
-  }
-  .gauge-fill {
-    height: 100%; border-radius: 4px;
-    transition: width 0.65s cubic-bezier(0.22,1,0.36,1), background-color 0.4s;
-    max-width: 100%;
-  }
-  .gauge-ticks { position: relative; height: 28px; margin-top: 3px; }
-  .gauge-tick-label {
-    position: absolute; top: 0;
-    font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted);
-    transform: translateX(-50%); text-align: center; line-height: 1.4;
-  }
-  .gauge-tick-line {
-    position: absolute; top: -11px; width: 1px; height: 10px;
-    background: var(--muted); opacity: 0.3; transform: translateX(-50%);
-  }
-
-  /* Metrics */
-  .metrics {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--border);
-    border: 1px solid var(--border); border-radius: 2px;
-    overflow: hidden; margin-top: 20px;
-  }
-  .metric { background: var(--paper); padding: 14px 16px; }
-  .metric-label { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 4px; }
-  .metric-value { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 500; color: var(--ink); }
-  .metric-unit  { font-size: 11px; color: var(--muted); margin-left: 2px; }
-
-  /* Share row */
-  .share-row {
-    display: flex; gap: 8px; margin-top: 16px; padding-top: 16px;
-    border-top: 1px solid var(--border);
-  }
-  .share-url-input {
-    flex: 1; padding: 9px 12px;
-    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted);
-    background: var(--paper); border: 1.5px solid var(--border); border-radius: 2px;
-    outline: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    cursor: default;
-  }
-  .btn-share {
-    padding: 9px 14px; font-size: 11px; letter-spacing: 0.08em;
-    background: var(--ink); color: var(--paper);
-    border: none; border-radius: 2px; cursor: pointer;
-    font-family: 'DM Mono', monospace; font-weight: 500;
-    transition: background 0.2s; white-space: nowrap;
-  }
-  .btn-share:hover { background: #2d2d4e; }
-
-  /* Accordion base */
-  .accordion { margin-top: 8px; }
-  .accordion-toggle {
-    display: flex; align-items: center; gap: 8px;
-    padding: 15px 0 11px; border-top: 1px solid var(--border);
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase;
-    cursor: pointer; user-select: none; transition: color 0.15s;
-  }
-  .accordion-toggle:hover { color: var(--ink); }
-  .accordion-arrow { transition: transform 0.2s; display: inline-block; }
-  .accordion-toggle.open .accordion-arrow { transform: rotate(90deg); }
-  .accordion-body {
-    display: none; animation: slideUp 0.25s ease;
-  }
-  .accordion-body.open { display: block; }
-
-  /* Reverse calc */
-  .reverse-inner {
-    background: #fff; border: 1px solid var(--border);
-    border-radius: 2px; padding: 20px; margin-bottom: 6px;
-  }
-  .reverse-result {
-    margin-top: 14px; padding: 14px 16px;
-    background: var(--paper); border-radius: 2px;
-    display: none;
-  }
-  .reverse-result strong {
-    font-family: 'DM Mono', monospace; font-size: 22px;
-    font-weight: 500; color: var(--ink); display: block; margin-bottom: 4px;
-  }
-  .reverse-result .sub { font-size: 11px; color: var(--muted); }
-
-  /* History */
-  .history-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 15px 0 11px; border-top: 1px solid var(--border);
-    cursor: pointer; user-select: none;
-  }
-  .history-head-left {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase;
-    transition: color 0.15s;
-  }
-  .history-head:hover .history-head-left { color: var(--ink); }
-  .history-count {
-    background: var(--ink); color: var(--paper);
-    font-size: 9px; padding: 2px 6px; border-radius: 10px;
-  }
-  .history-clear-btn {
-    font-size: 11px; color: var(--muted); cursor: pointer;
-    font-family: 'DM Mono', monospace; padding: 3px 8px;
-    border-radius: 2px; border: 1px solid var(--border);
-    background: transparent; font-weight: 400; letter-spacing: 0;
-    transition: background 0.15s, color 0.15s;
-  }
-  .history-clear-btn:hover { background: rgba(200,75,49,0.06); color: var(--accent); border-color: rgba(200,75,49,0.3); }
-  .history-body { display: none; animation: slideUp 0.25s ease; }
-  .history-body.open { display: block; }
-  .history-list { display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; }
-  .history-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 14px; background: #fff;
-    border: 1px solid var(--border); border-radius: 2px;
-    cursor: pointer; transition: border-color 0.15s;
-  }
-  .history-item:hover { border-color: var(--muted); }
-  .h-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .h-dot-good { background: var(--good); }
-  .h-dot-norm { background: #d4a853; }
-  .h-dot-warn { background: var(--warn); }
-  .h-info { flex: 1; min-width: 0; }
-  .h-hourly {
-    font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--ink);
-  }
-  .h-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .h-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); flex-shrink: 0; text-align: right; }
-  .h-restore { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0; transition: opacity 0.15s; margin-top: 2px; }
-  .history-item:hover .h-restore { opacity: 1; }
-  .history-empty { font-size: 12px; color: var(--muted); padding: 8px 0 14px; text-align: center; font-family: 'DM Mono', monospace; }
-
-  /* Responsive */
-  @media (max-width: 400px) {
-    .field-row        { grid-template-columns: 1fr; }
-    .metrics          { grid-template-columns: 1fr; }
-    .btn-row          { flex-direction: column; }
-    .btn-primary::after { display: none; }
-    .share-row        { flex-direction: column; }
-  }
-  /* 右下の固定ボタン */
-.back-float{
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 9999;
-  display: inline-block;
-  padding: 10px 14px;
-  background: var(--gold);
-  color: var(--ink);
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  font-family: 'DM Mono', monospace;
-  box-shadow: 0 6px 18px rgba(26,26,46,0.12);
-}
-.back-float:hover{ opacity: 0.95; transform: translateY(-2px); transition: .12s; }
-
-/* モバイルで邪魔なら少し小さく */
-@media (max-width: 420px){
-  .back-float{ padding:8px 10px; right: 10px; bottom: 10px; font-size:13px; }
-}
-</style>
+<link rel="stylesheet" href="common.css">
 </head>
-<body>
+<body data-page="tool" data-title="実質時給計算機">
 
-<header>
-  <div class="header-label">Webライター向けツール</div>
+<header class="page-header">
+  <div class="page-header-label">Webライター向けツール</div>
   <h1>実質時給計算機</h1>
   <p>案件ごとの実質時給を正確に把握しよう</p>
 </header>
 
-<div class="container">
+<!-- パンくずは common.js が自動挿入 -->
+
+<div class="container-tool">
 
   <!-- 入力カード -->
   <div class="card">
@@ -454,27 +111,22 @@
     <div class="result-header">計算結果</div>
     <div class="result-body">
 
-      <!-- 時給大表示 -->
       <div class="hourly-big">
         <div class="hourly-label">実質時給</div>
         <div class="hourly-value"><span class="yen">¥</span><span id="hourlyNum">0</span></div>
         <div><span class="eval-badge" id="evalBadge"></span></div>
       </div>
 
-      <!-- ゲージ -->
       <div class="gauge-wrap">
         <div class="gauge-section-label">時給レンジ</div>
-        <div style="position:relative; padding: 0 0 0 0;">
+        <div>
           <div class="gauge-track">
             <div class="gauge-fill" id="gaugeFill" style="width:0%"></div>
           </div>
-          <div class="gauge-ticks" id="gaugeTicks">
-            <!-- rendered by JS -->
-          </div>
+          <div class="gauge-ticks" id="gaugeTicks"></div>
         </div>
       </div>
 
-      <!-- 内訳 -->
       <div class="metrics">
         <div class="metric">
           <div class="metric-label">請求額</div>
@@ -494,7 +146,6 @@
         </div>
       </div>
 
-      <!-- 共有URL -->
       <div class="share-row">
         <input type="text" class="share-url-input" id="shareUrl" readonly placeholder="計算後にURLが生成されます">
         <button type="button" class="btn-share" id="shareBtn">URLコピー</button>
@@ -503,7 +154,7 @@
     </div>
   </div>
 
-  <!-- 逆算セクション -->
+  <!-- 逆算 -->
   <div class="accordion">
     <div class="accordion-toggle" id="reverseToggle">
       <span class="accordion-arrow">▶</span>
@@ -536,15 +187,12 @@
     </div>
   </div>
 
-  <!-- 関連ツールリンク -->
-  <div style="margin-top:8px;padding:15px 0 11px;border-top:1px solid var(--border);">
-    <p style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.06em;">
-      関連ツール：<a href="raise-price.html" style="color:var(--accent);text-decoration:none;font-weight:700;">単価アップ診断シミュレーター</a>
-      と組み合わせると、実質時給と月収アップの両面を可視化できます。
-    </p>
-  </div>
+  <!-- 関連ツール -->
+  <p class="related-link">
+    関連ツール：<a href="raise-price.html">単価アップ診断シミュレーター</a>と組み合わせると、実質時給と月収アップの両面を可視化できます。
+  </p>
 
-  <!-- 履歴セクション -->
+  <!-- 履歴 -->
   <div>
     <div class="history-head" id="historyHead">
       <div class="history-head-left">
@@ -562,6 +210,7 @@
 
 </div>
 
+<script src="common.js"></script>
 <script>
 (function () {
   var el = function(id) { return document.getElementById(id); };
@@ -573,13 +222,12 @@
 
   function fmt(n) { return Math.round(n).toLocaleString('ja-JP'); }
   function fmtF(n) { return (+n.toFixed(1)).toLocaleString('ja-JP'); }
-
   function parseClamp(id) {
     var v = parseFloat(el(id).value);
     return isFinite(v) ? Math.max(0, v) : 0;
   }
 
-  /* localStorage inputs */
+  /* localStorage */
   function saveInputs() {
     var obj = {};
     FIELDS.forEach(function(k) { obj[k] = el(k).value; });
@@ -596,23 +244,22 @@
 
   /* error */
   function showError(msg) {
-    var note = el('errorNote');
-    note.textContent = msg;
-    note.style.display = 'block';
+    el('errorNote').textContent = msg;
+    el('errorNote').style.display = 'block';
     el('result').style.display = 'none';
     el('copyBtn').disabled = true;
   }
   function clearError() {
-    var note = el('errorNote');
-    note.textContent = '';
-    note.style.display = 'none';
+    el('errorNote').textContent = '';
+    el('errorNote').style.display = 'none';
   }
 
   /* URL share */
   function buildShareUrl(cp, cc, wt, rc, rt) {
-  var params = 'cp=' + encodeURIComponent(cp) + '&cc=' + encodeURIComponent(cc) + '&wt=' + encodeURIComponent(wt) + '&rc=' + encodeURIComponent(rc) + '&rt=' + encodeURIComponent(rt);
-  return location.href.split('?')[0] + '?' + params;
-}
+    return location.href.split('?')[0] + '?cp=' + encodeURIComponent(cp) +
+      '&cc=' + encodeURIComponent(cc) + '&wt=' + encodeURIComponent(wt) +
+      '&rc=' + encodeURIComponent(rc) + '&rt=' + encodeURIComponent(rt);
+  }
   function loadFromUrl() {
     var search = location.search;
     if (!search || search.indexOf('cp=') === -1) return false;
@@ -624,8 +271,7 @@
     var map = {charPrice:'cp', charCount:'cc', workTime:'wt', revCount:'rc', revTime:'rt'};
     var found = false;
     Object.keys(map).forEach(function(field) {
-      var p = map[field];
-      if (params[p] !== undefined) { el(field).value = params[p]; found = true; }
+      if (params[map[field]] !== undefined) { el(field).value = params[map[field]]; found = true; }
     });
     return found;
   }
@@ -634,20 +280,14 @@
   function renderGaugeTicks() {
     var ticks = el('gaugeTicks');
     ticks.innerHTML = '';
-    // 最低賃金は線のみ（ラベルなし）、普通と良好はラベルあり
-    var lines = [{ val: 1013 }];
-    var labels = [
-      { val: 1200, label: '普通<br>¥1,200' },
-      { val: 2000, label: '良好<br>¥2,000' }
-    ];
-    lines.forEach(function(m) {
+    [{val:1013}].forEach(function(m) {
       var pct = (m.val / GAUGE_MAX * 100).toFixed(2);
       var line = document.createElement('div');
       line.className = 'gauge-tick-line';
       line.style.left = pct + '%';
       ticks.appendChild(line);
     });
-    labels.forEach(function(m) {
+    [{val:1200, label:'普通<br>¥1,200'}, {val:2000, label:'良好<br>¥2,000'}].forEach(function(m) {
       var pct = (m.val / GAUGE_MAX * 100).toFixed(2);
       var line = document.createElement('div');
       line.className = 'gauge-tick-line';
@@ -664,9 +304,7 @@
     var pct = Math.min(hourly / GAUGE_MAX * 100, 100);
     var fill = el('gaugeFill');
     fill.style.width = pct + '%';
-    if (hourly >= 2000)       fill.style.backgroundColor = 'var(--good)';
-    else if (hourly >= 1200)  fill.style.backgroundColor = '#d4a853';
-    else                      fill.style.backgroundColor = 'var(--warn)';
+    fill.style.backgroundColor = hourly >= 2000 ? 'var(--good)' : hourly >= 1200 ? '#d4a853' : 'var(--warn)';
   }
 
   /* history */
@@ -687,13 +325,9 @@
     var hist = loadHistory();
     el('historyCount').textContent = hist.length;
     var list = el('historyList');
-    var empty = el('historyEmpty');
     list.innerHTML = '';
-    if (hist.length === 0) {
-      empty.style.display = 'block';
-      return;
-    }
-    empty.style.display = 'none';
+    if (hist.length === 0) { el('historyEmpty').style.display = 'block'; return; }
+    el('historyEmpty').style.display = 'none';
     hist.forEach(function(h) {
       var dotCls = h.hourly >= 2000 ? 'h-dot-good' : h.hourly >= 1200 ? 'h-dot-norm' : 'h-dot-warn';
       var item = document.createElement('div');
@@ -724,6 +358,7 @@
   /* main calculate */
   function calculate() {
     saveInputs();
+    window.trackCalc && window.trackCalc('real-jikyuu');
 
     var charPrice = parseClamp('charPrice');
     var charCount = parseClamp('charCount');
@@ -735,64 +370,48 @@
     var revTotal  = revCount * revTime;
     var totalTime = workTime + revTotal;
 
-    if (totalTime <= 0) {
-      showError('⚠ 総作業時間が0分です。初回作業時間か修正時間を入力してください。');
-      return;
-    }
+    if (totalTime <= 0) { showError('⚠ 総作業時間が0分です。初回作業時間か修正時間を入力してください。'); return; }
     clearError();
 
-    var hourly = (billing / totalTime) * 60;
+    var hourly = billing / totalTime * 60;
 
     var evalText = '', evalClass = '';
     if (hourly >= 2000)      { evalText = '✦ 良好 — 高単価案件です';    evalClass = 'eval-good'; }
     else if (hourly >= 1200) { evalText = '◈ 普通 — 標準的な時給水準'; evalClass = 'eval-norm'; }
     else                     { evalText = '▲ 注意 — 時給が低めです';    evalClass = 'eval-warn'; }
 
-    /* DOM update — store raw values in data attributes to avoid double-unit on copy */
     var billingRounded   = Math.round(billing);
     var totalTimeRounded = Math.round(totalTime);
 
     el('hourlyNum').textContent = fmt(hourly);
-
     var bEl = el('billing');
     bEl.setAttribute('data-raw', billingRounded);
     bEl.innerHTML = fmt(billingRounded) + '<span class="metric-unit">円</span>';
-
     var tEl = el('totalTime');
     tEl.setAttribute('data-raw', totalTimeRounded);
     tEl.innerHTML = fmt(totalTimeRounded) + '<span class="metric-unit">分</span>';
-
-    el('initTime').innerHTML = fmt(Math.round(workTime))  + '<span class="metric-unit">分</span>';
-    el('revTotal').innerHTML = fmt(Math.round(revTotal))  + '<span class="metric-unit">分</span>';
+    el('initTime').innerHTML = fmt(Math.round(workTime)) + '<span class="metric-unit">分</span>';
+    el('revTotal').innerHTML = fmt(Math.round(revTotal)) + '<span class="metric-unit">分</span>';
 
     var badge = el('evalBadge');
     badge.textContent = evalText;
     badge.className = 'eval-badge ' + evalClass;
 
     updateGauge(hourly);
-
-    /* pre-fill reverse billing */
     el('reverseBilling').value = billingRounded;
     el('reverseResult').style.display = 'none';
-
-    /* share URL */
     el('shareUrl').value = buildShareUrl(charPrice, charCount, workTime, revCount, revTime);
 
-    /* history */
     var now = new Date();
     var dateStr = (now.getMonth()+1) + '/' + now.getDate() + ' ' +
                   String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
     pushHistory({
-      hourly: Math.round(hourly),
-      billing: billingRounded,
-      totalTime: totalTimeRounded,
+      hourly: Math.round(hourly), billing: billingRounded, totalTime: totalTimeRounded,
       charPrice: charPrice, charCount: charCount,
-      workTime: workTime, revCount: revCount, revTime: revTime,
-      date: dateStr
+      workTime: workTime, revCount: revCount, revTime: revTime, date: dateStr
     });
 
     el('copyBtn').disabled = false;
-
     var resultEl = el('result');
     resultEl.style.display = 'block';
     resultEl.style.animation = 'none';
@@ -801,26 +420,19 @@
     resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  /* copy result — use data-raw to avoid double-unit */
+  /* copy */
   function copyResult() {
-    var hourly    = el('hourlyNum').textContent;
-    var evalTxt   = el('evalBadge').textContent;
-    var billing   = el('billing').getAttribute('data-raw');
-    var totalTime = el('totalTime').getAttribute('data-raw');
     var text = [
-      '実質時給: \u00a5' + hourly + '/\u6642',
-      '\u8a55\u4fa1: '   + evalTxt,
-      '\u8acb\u6c42\u984d: \u00a5' + Number(billing).toLocaleString('ja-JP') + '\u5186',
-      '\u7dcf\u4f5c\u696d\u6642\u9593: ' + Number(totalTime).toLocaleString('ja-JP') + '\u5206',
+      '実質時給: ¥' + el('hourlyNum').textContent + '/時',
+      '評価: '      + el('evalBadge').textContent,
+      '請求額: ¥'  + Number(el('billing').getAttribute('data-raw')).toLocaleString('ja-JP') + '円',
+      '総作業時間: ' + Number(el('totalTime').getAttribute('data-raw')).toLocaleString('ja-JP') + '分',
     ].join('\n');
     navigator.clipboard.writeText(text).then(function() {
-      var btn = el('copyBtn');
-      var prev = btn.textContent;
-      btn.textContent = '\u2713 \u30b3\u30d4\u30fc\u6e08\u307f';
+      var btn = el('copyBtn'), prev = btn.textContent;
+      btn.textContent = '✓ コピー済み';
       setTimeout(function() { btn.textContent = prev; }, 1400);
-    }).catch(function() {
-      alert('\u30b3\u30d4\u30fc\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002\u624b\u52d5\u3067\u9078\u629e\u3057\u3066\u30b3\u30d4\u30fc\u3057\u3066\u304f\u3060\u3055\u3044\u3002');
-    });
+    }).catch(function() { alert('コピーに失敗しました。手動で選択してコピーしてください。'); });
   }
 
   /* reset */
@@ -837,30 +449,24 @@
   /* share URL copy */
   el('shareBtn').addEventListener('click', function() {
     var url = el('shareUrl').value;
-    if (!url || url === '') return;
+    if (!url) return;
     navigator.clipboard.writeText(url).then(function() {
-      var btn = el('shareBtn');
-      var prev = btn.textContent;
-      btn.textContent = '\u2713 \u30b3\u30d4\u30fc';
+      var btn = el('shareBtn'), prev = btn.textContent;
+      btn.textContent = '✓ コピー';
       setTimeout(function() { btn.textContent = prev; }, 1400);
-    }).catch(function() {
-      el('shareUrl').select();
-      try { document.execCommand('copy'); } catch(e) {}
-    });
+    }).catch(function() { el('shareUrl').select(); try { document.execCommand('copy'); } catch(e) {} });
   });
 
-  /* reverse calc toggle */
+  /* accordion */
   el('reverseToggle').addEventListener('click', function() {
-    var body = el('reverseBody');
-    var toggle = el('reverseToggle');
+    var body = el('reverseBody'), toggle = el('reverseToggle');
     var isOpen = body.classList.contains('open');
     body.classList.toggle('open', !isOpen);
     toggle.classList.toggle('open', !isOpen);
   });
-
   el('reverseCalcBtn').addEventListener('click', function() {
-    var targetH  = parseFloat(el('targetHourly').value);
-    var revBill  = parseFloat(el('reverseBilling').value);
+    var targetH = parseFloat(el('targetHourly').value);
+    var revBill = parseFloat(el('reverseBilling').value);
     if (!isFinite(targetH) || targetH <= 0) { alert('目標時給を入力してください。'); return; }
     if (!isFinite(revBill) || revBill <= 0) { alert('請求額を入力してください。'); return; }
     var maxTime = revBill / targetH * 60;
@@ -873,8 +479,7 @@
   /* history toggle */
   el('historyHead').addEventListener('click', function(e) {
     if (e.target === el('historyClearBtn') || el('historyClearBtn').contains(e.target)) return;
-    var body = el('historyBody');
-    var isOpen = body.classList.contains('open');
+    var body = el('historyBody'), isOpen = body.classList.contains('open');
     body.classList.toggle('open', !isOpen);
     el('historyArrow').textContent = isOpen ? '▶' : '▼';
   });
@@ -894,17 +499,13 @@
   el('calcBtn').addEventListener('click', calculate);
   el('copyBtn').addEventListener('click', copyResult);
   el('resetBtn').addEventListener('click', resetAll);
-
   FIELDS.forEach(function(id) {
-    el(id).addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { e.preventDefault(); calculate(); }
-    });
+    el(id).addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); calculate(); } });
     el(id).addEventListener('input', saveInputs);
   });
 
   if (fromUrl) calculate();
 })();
 </script>
-  <a href="/" class="back-float" aria-label="トップページへ戻る">トップへ</a>
 </body>
 </html>
