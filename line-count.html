@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Webライター向け行数カウンター｜テキストの行数を即カウント【無料】</title>
-<meta name="description" content="Webライター向けの無料行数カウンターツール。テキストを貼るだけで総行数・空行を除いた実行数をリアルタイム計算。原稿管理や入稿前チェックに便利です。">
+<meta name="description" content="Webライター向けの無料行数カウンターツール。テキストを貼るだけで総行数・空行を除いた実質行数をリアルタイム計算。原稿管理や入稿前チェックに便利です。">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Webライター向け行数カウンター｜テキストの行数を即カウント【無料】">
-<meta property="og:description" content="テキストを貼るだけで総行数・実行数をリアルタイム計算できる無料ツール。">
+<meta property="og:description" content="テキストを貼るだけで総行数・実質行数をリアルタイム計算できる無料ツール。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://writer-salary-calculator.babynakunaku.workers.dev/line-count.html">
 <meta property="og:image" content="https://writer-salary-calculator.babynakunaku.workers.dev/ogp.jpg">
@@ -20,7 +20,7 @@
   "url": "https://writer-salary-calculator.babynakunaku.workers.dev/line-count.html",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "All",
-  "description": "テキストを貼るだけで総行数・実行数をリアルタイム計算できる無料ツール。",
+  "description": "テキストを貼るだけで総行数・実質行数をリアルタイム計算できる無料ツール。",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
 }
 </script>
@@ -100,7 +100,7 @@
           </div>
         </div>
         <div class="metric">
-          <div class="metric-label">実行数（空行除く）</div>
+          <div class="metric-label">実質行数（空行除く）</div>
           <div class="metric-value highlight" id="netLines">
             0<span class="metric-unit">行</span>
           </div>
@@ -125,12 +125,12 @@
         媒体やクライアントによっては、文字数だけでなく「行数」での管理を求められることがあります。特にコラムや読みやすさを重視した記事では、1行の長さと行数が読者体験に直結します。
       </p>
       <p>
-        このツールはテキストを貼り付けるだけでリアルタイムに総行数・空行を除いた実行数・空行数を集計します。入稿前のチェックにそのままお使いください。
+        このツールはテキストを貼り付けるだけでリアルタイムに総行数・空行を除いた実質行数・空行数を集計します。入稿前のチェックにそのままお使いください。
       </p>
       <div class="explain-points">
         <div class="explain-point">
           <span class="explain-point-num">01</span>
-          <span><strong>総行数と実行数の違いを知る</strong>。総行数には空行も含まれます。実際の文章量を把握するには空行を除いた実行数が重要です。空行が多すぎると見栄えが悪くなることもあります。</span>
+          <span><strong>総行数と実質行数の違いを知る</strong>。総行数には空行も含まれます。実際の文章量を把握するには空行を除いた実質行数が重要です。空行が多すぎると見栄えが悪くなることもあります。</span>
         </div>
         <div class="explain-point">
           <span class="explain-point-num">02</span>
@@ -181,10 +181,17 @@
   function calculate() {
     var text  = el('inputText').value;
 
-    /* 行分割（末尾の改行で余分な空行が出ないよう調整） */
-    var lines = text === '' ? [] : text.split('\n');
-    var total = lines.length;
-    var empty = lines.filter(function(l) { return l.trim() === ''; }).length;
+    // 行分割：CRLF / LF の両方に対応
+    // 末尾の余分な空要素（末尾改行でできる空行）を削除する
+    var rawLines = text === '' ? [] : text.split(/\r?\n/);
+    while (rawLines.length > 0 && rawLines[rawLines.length - 1] === '') {
+      rawLines.pop();
+    }
+
+    var total = rawLines.length;
+
+    // 空行は trim() が空文字になるものをカウント
+    var empty = rawLines.filter(function(l) { return l.trim() === ''; }).length;
     var net   = total - empty;
 
     /* テキストエリア下ミニカウンター */
