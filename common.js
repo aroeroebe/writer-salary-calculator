@@ -81,6 +81,7 @@ gtag('config', GA_ID);
         '<a href="/real-jikyuu.html">実質時給計算機</a>' +
         '<a href="/raise-price.html">単価アップ診断</a>' +
       　'<a href="/word-count.html">文字数カウンター</a>' +
+      　'<a href="/line-count.html">行数カウンター</a>' +
       '</nav>' +
       '<p class="footer-copy">&copy; 2025 Webライター向け無料ツール</p>';
     document.body.appendChild(footer);
